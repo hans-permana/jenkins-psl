@@ -8,7 +8,7 @@ def healthcheck(Pipeline p) {
  
    timeout(time: p.timeout_hc, unit: 'SECONDS'){
        waitUntil(quiet: true) {
-           def response = sh script: "curl ${hostIp}:${p.app_port}/ping", returnStdout: true
+           def response = sh script: "curl localhost:${p.app_port}/ping", returnStdout: true
            if (response != "pong!"){
                error("ERROR102 - Service is Unhealthy for last ${p.timeout_hc} Second")
            } else {
